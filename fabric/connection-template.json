@@ -1,0 +1,138 @@
+{
+    "name": "event-consortium",
+    "x-type": "hlfv1",
+    "version": "1.0.0",
+    "client": {
+        "organization": "INSERT_ORG",
+        "connection": {
+            "timeout": {
+                "peer": {
+                    "endorser": "300",
+                    "eventHub": "300",
+                    "eventReg": "300"
+                },
+                "orderer": "300"
+            }
+        }
+    },
+    "channels": {
+        "CHANNEL_NAME": {
+            "orderers": [
+                "orderer.event-consortium.com"
+            ],
+            "peers": {
+                "peer0.centralbank.event-consortium.com": {
+                    "endorsingPeer": true,
+                    "chaincodeQuery": true,
+                    "eventSource": true
+                },
+                "peer1.centralbank.event-consortium.com": {
+                    "endorsingPeer": true,
+                    "chaincodeQuery": true,
+                    "eventSource": true
+                },
+                "peer0.org1.event-consortium.com": {
+                    "endorsingPeer": true,
+                    "chaincodeQuery": true,
+                    "eventSource": true
+                },
+                "peer1.org1.event-consortium.com": {
+                    "endorsingPeer": true,
+                    "chaincodeQuery": true,
+                    "eventSource": true
+                }
+            }
+        }
+    },
+    "organizations": {
+        "CentralBank": {
+            "mspid": "CentralBankMSP",
+            "peers": [
+                "peer0.centralbank.event-consortium.com",
+                "peer1.centralbank.event-consortium.com"
+            ],
+            "certificateAuthorities": [
+                "ca.centralbank.event-consortium.com"
+            ]
+        },
+        "Org1": {
+            "mspid": "Org1MSP",
+            "peers": [
+                "peer0.org1.event-consortium.com",
+                "peer1.org1.event-consortium.com"
+            ],
+            "certificateAuthorities": [
+                "ca.org1.event-consortium.com"
+            ]
+        }
+    },
+    "orderers": {
+        "orderer.event-consortium.com": {
+            "url": "grpcs://localhost:7050",
+            "grpcOptions": {
+                "ssl-target-name-override": "orderer.event-consortium.com"
+            },
+            "tlsCACerts": {
+                "pem": "INSERT_ORDERER_CA_CERT"
+            }
+        }
+    },
+    "peers": {
+        "peer0.centralbank.event-consortium.com": {
+            "url": "grpcs://localhost:7051",
+            "eventUrl": "grpcs://localhost:7053",
+            "grpcOptions": {
+                "ssl-target-name-override": "peer0.centralbank.event-consortium.com"
+            },
+            "tlsCACerts": {
+                "pem": "INSERT_CENTRALBANK_CA_CERT"
+            }
+        },
+        "peer1.centralbank.event-consortium.com": {
+            "url": "grpcs://localhost:8051",
+            "eventUrl": "grpcs://localhost:8053",
+            "grpcOptions": {
+                "ssl-target-name-override": "peer1.centralbank.event-consortium.com"
+            },
+            "tlsCACerts": {
+                "pem": "INSERT_CENTRALBANK_CA_CERT"
+            }
+        },
+        "peer0.org1.event-consortium.com": {
+            "url": "grpcs://localhost:9051",
+            "eventUrl": "grpcs://localhost:9053",
+            "grpcOptions": {
+                "ssl-target-name-override": "peer0.org1.event-consortium.com"
+            },
+            "tlsCACerts": {
+                "pem": "INSERT_ORG1_CA_CERT"
+            }
+        },
+        "peer1.org1.event-consortium.com": {
+            "url": "grpcs://localhost:10051",
+            "eventUrl": "grpcs://localhost:10053",
+            "grpcOptions": {
+                "ssl-target-name-override": "peer1.org1.event-consortium.com"
+            },
+            "tlsCACerts": {
+                "pem": "INSERT_ORG1_CA_CERT"
+            }
+        }
+    },
+    "certificateAuthorities": {
+        "ca.centralbank.event-consortium.com": {
+            "url": "https://localhost:7054",
+            "caName": "ca-centralbank",
+            "httpOptions": {
+                "verify": false
+            }
+        },
+        "ca.org1.event-consortium.com": {
+            "url": "https://localhost:8054",
+            "caName": "ca-org1",
+            "httpOptions": {
+                "verify": false
+            }
+        }
+    }
+}
