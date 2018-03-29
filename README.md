@@ -39,6 +39,8 @@ For convenience, add the bin to the PATH:
 Finally, move into the `fabric` folder and run the `build-network.sh` file twice:
 - `./build-network.sh -m generate` to generate the cryptographic material
 - `./build-network.sh -m up -s couchdb` to start the network on docker containers
+- `./build-network.sh -m composer-generate` Generate PeerAdmin card
+- `./build-network.sh -m composer-start` Start Composer runtime and deploy BNA
 
 Once you are done developing, run the following command to clean up your environment:
 
